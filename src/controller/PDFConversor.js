@@ -1,7 +1,7 @@
 export function toPDF (request, response) {
     
-  const { encoding } = request.files
+  const [files] = request.files
 
-  console.log(encoding)
+  console.log(files)
 
 }

@@ -5,8 +5,18 @@ function sendImg() {
   // Take the file
   var file = document.getElementById('file').files[0]
 
-  // Take the file extension
-  const extension = '.' + file.name.split('.')[1]
+  let extension = null
+
+  if(file.name.split('.').length > 2) {
+    const lastArrayIndex = file.name.split('.').length - 1
+    console.log(lastArrayIndex)
+    // Take the file extension
+    extension = '.' + file.name.split('.')[lastArrayIndex]
+    console.log(extension)  
+  } else {
+    // Take the file extension
+    extension = '.' + file.name.split('.')[1]
+  }
   
   // Check if there's a file
   if (file.length == 0) {

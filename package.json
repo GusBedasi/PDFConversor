@@ -16,6 +16,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "lite-server": "^2.5.4",
     "multer": "^1.4.2"
   }
 }
