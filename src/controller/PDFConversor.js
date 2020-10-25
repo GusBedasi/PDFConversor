@@ -1,5 +1,7 @@
 export function toPDF (request, response) {
     
-  return response.json(request.body, request.files)
+  const { encoding } = request.files
+
+  console.log(encoding)
 
 }

@@ -61,3 +61,11 @@ main .input-block{
 .input-block button:focus {
   outline: none;
 }
+
+.swal2-popup {
+  width: 40rem;
+}
+
+.swal2-header, .swal2-html-container, .swal2-actions, .swal2-x-mark{
+  font-size: 2rem;
+}
