@@ -1,5 +1,5 @@
 {
   "port": 3000,
-  "files": ["./web/**/*.{html,htm,css,js}"],
-  "server": { "baseDir": "./web" }
+  "files": ["./src/views/**/*.{html,htm,css,js}"],
+  "server": { "baseDir": "./src/views" }
 }

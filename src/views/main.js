@@ -1,4 +1,4 @@
-function sendImg() {
+async function sendImg() {
   // Take the user desired filaname
   var filename = document.getElementById('filename').value
 
@@ -34,15 +34,37 @@ function sendImg() {
   const formData = new FormData();
   formData.append('file', file, filename + extension);
 
-  // Send the request to the server
-  fetch('http://localhost:3333/convert', {
+  const pdfFilename = await (await fetch('http://localhost:3333/convert', {
     method: 'POST',
     body: formData
-  }).then(
-    cleanFields()
-  )
+  })).text()
+
+  downloadFile(pdfFilename)
+  cleanFields()
 }
 
+async function downloadFile(pdfFilename) {
+
+  // Get the file to download 
+  const downloadFile = await fetch('http://localhost:3333/download', {
+    headers: { 'Content-Type': 'application/json'},
+    method: 'POST',
+    body: JSON.stringify({filename: pdfFilename}),
+  })
+
+  // Create an Anchor to trigger the download event
+  const downloadFileBlob = await downloadFile.blob()
+  const urlToDownload = window.URL.createObjectURL(downloadFileBlob)
+  const downloadAnchor = document.createElement('a')
+  downloadAnchor.style.display = 'none'
+  downloadAnchor.href = urlToDownload
+  downloadAnchor.download = pdfFilename
+  document.body.appendChild(downloadAnchor)
+  downloadAnchor.click() 
+  window.URL.revokeObjectURL(urlToDownload);
+}
+
+// Clean the input fields
 function cleanFields(){
   const filename = document.getElementById('filename')
   const file = document.getElementById('file')

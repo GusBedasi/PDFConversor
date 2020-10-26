@@ -3,7 +3,6 @@ import fs from 'fs';
 import Path from 'path'
 
 export function toPDF (request, response) {
-  
   // Get files from the request
   const [fileObj] = request.files
 
@@ -20,5 +19,5 @@ export function toPDF (request, response) {
   doc.end()
 
   // Send PDF file to frontend
-  response.attachment(Path.resolve(__dirname, '..', '..', 'pdf', filenameWithoutImgExtension))
+  response.attachment(Path.resolve(__dirname, '..', '..', 'pdf', filenameWithoutImgExtension)).send(filenameWithoutImgExtension)
 }
