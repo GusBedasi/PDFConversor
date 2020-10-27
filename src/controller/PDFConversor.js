@@ -19,5 +19,5 @@ export function toPDF (request, response) {
   doc.end()
 
   // Send PDF file to frontend
-  response.attachment(Path.resolve(__dirname, '..', '..', 'pdf', filenameWithoutImgExtension)).send(filenameWithoutImgExtension)
+  response.attachment(Path.resolve(__dirname, '..', '..', 'pdf', filenameWithoutImgExtension)).json({pfdExtension: filenameWithoutImgExtension, originalExtension: filename})
 }

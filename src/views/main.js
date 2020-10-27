@@ -34,22 +34,24 @@ async function sendImg() {
   const formData = new FormData();
   formData.append('file', file, filename + extension);
 
-  const pdfFilename = await (await fetch('http://localhost:3333/convert', {
+  const { pfdExtension, originalExtension } = await (await fetch('http://localhost:3333/convert', {
     method: 'POST',
     body: formData
-  })).text()
+  })).json()
 
-  downloadFile(pdfFilename)
+  console.log(pfdExtension, originalExtension)
+
+  downloadFile(pfdExtension, originalExtension)
   cleanFields()
 }
 
-async function downloadFile(pdfFilename) {
+async function downloadFile(pfdExtension, originalExtension) {
 
   // Get the file to download 
   const downloadFile = await fetch('http://localhost:3333/download', {
     headers: { 'Content-Type': 'application/json'},
     method: 'POST',
-    body: JSON.stringify({filename: pdfFilename}),
+    body: JSON.stringify({filename: pfdExtension, originalFilename: originalExtension}),
   })
 
   // Create an Anchor to trigger the download event
@@ -58,7 +60,7 @@ async function downloadFile(pdfFilename) {
   const downloadAnchor = document.createElement('a')
   downloadAnchor.style.display = 'none'
   downloadAnchor.href = urlToDownload
-  downloadAnchor.download = pdfFilename
+  downloadAnchor.download = pfdExtension
   document.body.appendChild(downloadAnchor)
   downloadAnchor.click() 
   window.URL.revokeObjectURL(urlToDownload);
