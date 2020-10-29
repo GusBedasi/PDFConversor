@@ -22,5 +22,5 @@ export async function downloadFile(request, response) {
     } catch (err) { 
       console.error(err)
     }
-  })
+  }, 200)
 }
