@@ -18,5 +18,8 @@ const upload = multer(uploadConfig)
 
 routes.post('/download', downloadFile)
 routes.post('/convert', upload.any('image') ,toPDF)
+route.get('/', (req, res) => {
+  console.log('Teste')
+})
 
 export default routes;
