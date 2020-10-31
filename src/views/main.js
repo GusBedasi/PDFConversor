@@ -34,7 +34,7 @@ async function sendImg() {
   const formData = new FormData();
   formData.append('file', file, filename + extension);
 
-  const { pfdExtension, originalExtension } = await (await fetch('http://localhost:3333/convert', {
+  const { pfdExtension, originalExtension } = await (await fetch('https://pdfc-onversor.vercel.app/convert', {
     method: 'POST',
     body: formData
   })).json()
@@ -48,7 +48,7 @@ async function sendImg() {
 async function downloadFile(pfdExtension, originalExtension) {
 
   // Get the file to download 
-  const downloadFile = await fetch('http://localhost:3333/download', {
+  const downloadFile = await fetch('https://pdfc-onversor.vercel.app/download', {
     headers: { 'Content-Type': 'application/json'},
     method: 'POST',
     body: JSON.stringify({filename: pfdExtension, originalFilename: originalExtension}),
