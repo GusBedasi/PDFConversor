@@ -36,7 +36,7 @@ async function sendImg() {
   const formData = new FormData();
   formData.append('file', file, filename + extension);
 
-  const { pfdExtension, originalExtension } = await (await fetch(`${url}/convert`, {
+  const { pfdExtension, originalExtension } = await (await fetch(`${url}convert`, {
     method: 'POST',
     body: formData
   })).json()
@@ -50,7 +50,7 @@ async function sendImg() {
 async function downloadFile(pfdExtension, originalExtension) {
 
   // Get the file to download 
-  const downloadFile = await fetch(`${url}/download`, {
+  const downloadFile = await fetch(`${url}download`, {
     headers: { 'Content-Type': 'application/json'},
     method: 'POST',
     body: JSON.stringify({filename: pfdExtension, originalFilename: originalExtension}),
